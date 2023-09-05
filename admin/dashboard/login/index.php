@@ -2,9 +2,9 @@
 session_start();
 require '../../../config/database.php';
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
-    header('Location: ../');
-}
+//if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+//    header('Location: ../');
+//}
 
 $required_fields = ['email', 'password'];
 $credentials = [];
@@ -231,28 +231,6 @@ function login($email, $password) {
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="flex justify-center items-center mt-6">
-            <a
-                href="#"
-                target="_blank"
-                class="
-            inline-flex
-            items-center
-            text-gray-700
-            font-medium
-            text-xs text-center
-          "
-            >
-          <span class="ml-2"
-          >You don't have an account?
-            <a
-                href="#"
-                class="text-xs ml-2 text-blue-500 font-semibold"
-            >Register now</a
-            ></span
-          >
-            </a>
         </div>
     </div>
     </body>
