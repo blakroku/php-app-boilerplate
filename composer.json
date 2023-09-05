@@ -1,0 +1,21 @@
+{
+    "name": "blakroku/php-dev-boilerplate",
+    "description": "Boilerplate for developing simple page web apps",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Blakroku\\PHPDevBoilerplate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kwame Adoko",
+            "email": "blakroku@gmail.com"
+        }
+    ],
+    "require": {
+        "propel/propel": "~2.0@beta",
+        "cartalyst/sentinel": "2.0.*"
+    }
+}
