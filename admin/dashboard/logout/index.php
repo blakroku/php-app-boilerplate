@@ -1,5 +1,6 @@
 <?php
-session_start();
-unset($_SESSION['logged_in']);
+require_once '../../../config/app.php';
+
+session_destroy();
 
 header('Location: ../login/');

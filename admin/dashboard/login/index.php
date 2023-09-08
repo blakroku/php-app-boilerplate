@@ -1,10 +1,9 @@
 <?php
-session_start();
-require '../../../config/database.php';
+require_once '../../../config/app.php';
 
-//if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
-//    header('Location: ../');
-//}
+if (isset($_SESSION['AUTHENTICATED'])) {
+    header('Location: ../index.php');
+}
 
 $required_fields = ['email', 'password'];
 $credentials = [];
@@ -37,7 +36,7 @@ function login($email, $password) {
 //    return password_hash('secret', PASSWORD_DEFAULT);
 
     if (password_verify($password, $user->password)) {
-        $_SESSION['logged_in'] = true;
+        $_SESSION['AUTHENTICATED'] = true;
         return true;
     }
 
@@ -53,7 +52,7 @@ function login($email, $password) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title><?= APP_NAME; ?> - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -96,8 +95,7 @@ function login($email, $password) {
                         <label
                             for="email"
                             class="mb-1 text-xs tracking-wide text-gray-600"
-                        >E-Mail Address:</label
-                        >
+                        >E-Mail Address:</label>
                         <div class="relative">
                             <div
                                 class="
