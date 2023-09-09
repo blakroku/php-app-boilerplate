@@ -5,6 +5,35 @@ if (!isset($_SESSION['AUTHENTICATED'])) {
     header('Location: login/index.php'); // todo: create a function and a DIR const for invalid session
 }
 
+// Add lottery ticket
+$required_fields = ['confirmation_code', 'confirmation_date', 'prize_won', 'ticket_value'];
+$has_error = false;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            $has_error = true;
+        }
+    }
+
+    if ($has_error) {
+        $error_message = 'All fields are required';
+    }
+
+    if (!$has_error) {
+        $lottery = R::dispense('results');
+
+        $lottery->confirmation_code = $_POST['confirmation_code'];
+        $lottery->confirmation_date = $_POST['confirmation_date'];
+        $lottery->prize_won = $_POST['prize_won'];
+        $lottery->ticket_value = $_POST['ticket_value'];
+
+        R::store($lottery);
+
+        $success_message = 'Lottery results successfully added';
+    }
+}
+
 ?>
 
 <!doctype html>
@@ -51,8 +80,264 @@ if (!isset($_SESSION['AUTHENTICATED'])) {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </span>
-                        <span>Add Lottory</span>
+                        <span>Add Lottery</span>
                     </a>
+                    <div class="w-100 h-100 bg-blue-100 my-6 rounded p-3">
+                        <div class="mb-6">
+                            <?php if(!empty($error_message)): ?>
+                                 <span class="block text-sm text-red-600 mt-8 flex items-center">
+                                    <span class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline-block">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <?= $error_message; ?>
+                                    </span>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="mb-6">
+                            <?php if(!empty($success_message)): ?>
+                                 <span class="block text-sm text-green-600 mt-8 flex items-center">
+                                    <span class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline-block">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <?= $success_message; ?>
+                                    </span>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        <div>
+                            <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+                                <div class="flex flex-col mb-5">
+                                    <label
+                                        for="confirmation_code"
+                                        class="mb-1 text-xs tracking-wide text-gray-600"
+                                    >Confirmation Code Or Ticket #:</label>
+                                    <div class="relative">
+                                        <div
+                                            class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                                        >
+                                            <i class="fas fa-at text-blue-500"></i>
+                                        </div>
+
+                                        <input
+                                            id="confirmation_code"
+                                            type="text"
+                                            name="confirmation_code"
+                                            class="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                                            placeholder="Confirmation Code Or Ticket #"
+                                        />
+                                    </div>
+
+                                    <!--                        --><?php //if($ture = 1): ?>
+                                    <!--                            <span class="ml-4 text-sm text-red-500">The email address field is required</span>-->
+                                    <!--                        --><?php //endif; ?>
+
+                                </div><div class="flex flex-col mb-5">
+                                    <label
+                                        for="confirmation_date"
+                                        class="mb-1 text-xs tracking-wide text-gray-600"
+                                    >Confirmation Date:</label>
+                                    <div class="relative">
+                                        <div
+                                            class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                                        >
+                                            <i class="fas fa-at text-blue-500"></i>
+                                        </div>
+
+                                        <input
+                                            id="confirmation_date"
+                                            type="date"
+                                            name="confirmation_date"
+                                            class="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                                            placeholder="Confirmation Date"
+                                        />
+                                    </div>
+
+                                    <!--                        --><?php //if($ture = 1): ?>
+                                    <!--                            <span class="ml-4 text-sm text-red-500">The email address field is required</span>-->
+                                    <!--                        --><?php //endif; ?>
+
+                                </div><div class="flex flex-col mb-5">
+                                    <label
+                                        for="prize_won"
+                                        class="mb-1 text-xs tracking-wide text-gray-600"
+                                    >Prize Won:</label>
+                                    <div class="relative">
+                                        <div
+                                            class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                                        >
+                                            <i class="fas fa-at text-blue-500"></i>
+                                        </div>
+
+                                        <input
+                                            id="prize_won"
+                                            type="text"
+                                            name="prize_won"
+                                            class="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                                            placeholder="Prize Won"
+                                        />
+                                    </div>
+
+                                    <!--                        --><?php //if($ture = 1): ?>
+                                    <!--                            <span class="ml-4 text-sm text-red-500">The email address field is required</span>-->
+                                    <!--                        --><?php //endif; ?>
+
+                                </div><div class="flex flex-col mb-5">
+                                    <label
+                                        for="ticket_value"
+                                        class="mb-1 text-xs tracking-wide text-gray-600"
+                                    >Ticket Value:</label>
+                                    <div class="relative">
+                                        <div
+                                            class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                                        >
+                                            <i class="fas fa-at text-blue-500"></i>
+                                        </div>
+
+                                        <input
+                                            id="ticket_value"
+                                            type="text"
+                                            name="ticket_value"
+                                            class="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                                            placeholder="Ticket Value"
+                                        />
+                                    </div>
+
+                                    <!--                        --><?php //if($ture = 1): ?>
+                                    <!--                            <span class="ml-4 text-sm text-red-500">The email address field is required</span>-->
+                                    <!--                        --><?php //endif; ?>
+
+                                </div>
+                                <div class="flex w-full">
+                                    <button
+                                        type="submit"
+                                        name="doLogin"
+                                        class="
+                  flex
+                  mt-2
+                  items-center
+                  justify-center
+                  focus:outline-none
+                  text-white text-sm
+                  sm:text-base
+                  bg-blue-500
+                  hover:bg-blue-600
+                  rounded-2xl
+                  py-2
+                  w-full
+                  transition
+                  duration-150
+                  ease-in
+                "
+                                    >
+                                        <span class="mr-2 uppercase">Add</span>
+                                        <span>
+                  <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                  >
+                    <path
+                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="shadow-xl border border-gray-100 p-12">
                     log

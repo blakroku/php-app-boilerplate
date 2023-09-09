@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-function login($email, $password) {
+function login($email, $password): bool
+{
     $user = R::findOne('users', 'username=?', [$email]);
 
 //    return password_hash('secret', PASSWORD_DEFAULT);
-
-    if (password_verify($password, $user->password)) {
+    if (!empty($user) && password_verify($password, $user->password)) {
         $_SESSION['AUTHENTICATED'] = true;
         return true;
     }
@@ -95,7 +95,7 @@ function login($email, $password) {
                         <label
                             for="email"
                             class="mb-1 text-xs tracking-wide text-gray-600"
-                        >E-Mail Address:</label>
+                        >Username:</label>
                         <div class="relative">
                             <div
                                 class="
@@ -115,7 +115,7 @@ function login($email, $password) {
 
                             <input
                                 id="email"
-                                type="email"
+                                type="text"
                                 name="email"
                                 class="
                     text-sm
@@ -131,11 +131,6 @@ function login($email, $password) {
                                 placeholder="Enter your email"
                             />
                         </div>
-
-<!--                        --><?php //if($ture = 1): ?>
-<!--                            <span class="ml-4 text-sm text-red-500">The email address field is required</span>-->
-<!--                        --><?php //endif; ?>
-
                     </div>
                     <div class="flex flex-col mb-6">
                         <label
