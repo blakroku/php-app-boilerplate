@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+    // Load results
+    $results = R::findAll( 'results');
 ?>
 
 <!doctype html>
@@ -339,10 +341,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                 </div>
-                <div class="shadow-xl border border-gray-100 p-12">
-                    log
+<!--                <div class="shadow-xl border border-gray-100 p-12">-->
+                    <?php if($results): ?>
+
+                        <div class="max-w-2xl mx-auto">
+
+                            <div class="w-full p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lottery Results</h3>
+                                </div>
+                                <div class="flow-root">
+                                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <?php foreach ($results as $result): ?>
+                                            <li class="py-3 sm:py-4">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="flex-shrink-0">
+                                                    <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                        <?= $result->confirmation_code; ?>
+                                                    </p>
+                                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                        <?= $result->confirmation_date; ?>
+                                                    </p>
+                                                </div>
+                                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    <small class="mr-2"><?= $result->prize_won; ?></small>
+                                                    <span><?= $result->ticket_value; ?></span>
+                                                </div>
+                                                <div>
+                                                    <a href="deleteLottery.php?id=<?= $result->id; ?>" class="text-red-600 font-semibold" onclick="return confirm('Are you sure?')">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div>
+                            <pre>You havent entered any result yet!</pre>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            </div>
+<!--            </div>-->
         </main>
     </section>
 </body>
