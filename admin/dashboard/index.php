@@ -113,6 +113,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </span>
                             <?php endif; ?>
                         </div>
+                        <div class="mb-6">
+                            <?php if(isset($_SESSION['deleted'])): ?>
+                                 <span class="block text-sm text-green-600 mt-8 flex items-center">
+                                    <span class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline-block">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        <?= $_SESSION['deleted']; ?>
+                                        <?php unset($_SESSION['deleted']); ?>
+                                    </span>
+                                </span>
+                            <?php endif; ?>
+                        </div>
                         <div>
                             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
                                 <div class="flex flex-col mb-5">
@@ -356,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <li class="py-3 sm:py-4">
                                             <div class="flex items-center space-x-4">
                                                 <div class="flex-shrink-0">
-                                                    <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                                                    <img class="w-13 h-8 rounded-full" src="../../public/images/images.jpeg" alt="Neil image">
                                                 </div>
                                                 <div class="flex-1 min-w-0">
                                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
