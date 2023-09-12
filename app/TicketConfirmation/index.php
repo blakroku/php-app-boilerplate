@@ -66,7 +66,7 @@ require_once '../../config/app.php';
                     </form>
                 </div>
             </div>
-            <div class="credit">©2020 <?php echo APP_NAME; ?> - <a href="https://onepagelove.com/split" target="_blank" class="credit-links">Turning Luck into Lifestyle!</a>
+            <div class="credit">©<?= date('Y'); ?> <?php echo APP_NAME; ?>
             </div>
         </div>
     </div>

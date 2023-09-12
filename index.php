@@ -40,25 +40,39 @@ require_once 'config/app.php';
         <div style="margin-bottom: 100px; margin-top: 200px">
           <img src="public/images/logo.png" alt="" style="width: 500px">
         </div>
-        <h1 class="tagline"><strong class="bold-text" style="color: red">Creative. Lifestyle. Lottery.</strong></h1>
-        <p class="bio">Welcome to our premier online lottery platform, where dreams come true. With a vast array of exciting games, massive jackpots, and secure transactions, we're your ticket to thrilling opportunities. Join our community and be part of the excitement. Play, win, and change your life today! </p>
+        <h1 class="tagline text-4xl"><strong class="bold-text" style="color: red">Elevating Global Prosperity: Where Impact Begins!</strong></h1>
+        <p class="bio">Global Sweepstakes is a joint initiative between Global Gaming Inc, World Bank Group and International Monetary Fund - IMF with the sole purpose of eradicating poverty around the world using the most everyday accessible technology "EMAIL", Your email address is your unique ticket into our sweepstakes program, winners are selected at random via an automated system and lucky winners are notified via email.</p>
+        <p class="mb-12 text-red-800">We do not sell tickets or have any required system to enter into the sweepstakes, your Email ID grants you automatic access to our sweepstakes program with unlimited entries into every lottery selection.</p>
         <div class="links w-row">
           <div class="w-col w-col-4">
-            <div class="text-block-2">Our Network</div>
+            <div class="text-block-2">Our Platform</div>
             <ul role="list" class="list w-list-unstyled">
-              <li>
-                <a href="app/TicketConfirmation/" class="hover:text-red-600 hover:underline">Confirm Ticket</a>
+              <li class="mb-4">
+                <a href="app/TicketConfirmation/" class="hover:text-red-600 hover:underline flex items-center">
+                  <span class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline-block">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                  <span>
+                    Check Your Ticket Number
+                  </span>
+                </a>
               </li>
-<!--              <li>-->
-<!--                <a href="app/EnterDraw/">Enter Draw</a>-->
-<!--              </li>-->
               <li>
-                <a href="app/ContactUs/" class="hover:text-red-600 hover:underline">Contact Us</a>
+                <a href="app/ContactUs/" class="hover:text-red-600 hover:underline">
+                  <span class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline-block">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                    </svg>
+                  </span>
+                  <span>Contact <?= APP_NAME; ?></span>
+                </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="credit">©2020 <?php echo APP_NAME; ?> - <a href="https://onepagelove.com/split" target="_blank" class="credit-links">Turning Luck into Lifestyle!</a>
+        <div class="credit">©<?= date('Y'); ?> <?php echo APP_NAME; ?>
         </div>
       </div>
     </div>
